@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "check": "next lint && tsc --noEmit",
-    "dev": "CONSOLE_NINJA_DISABLE=1 next dev --turbo",
+    "dev": "next dev --turbo",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "lint": "next lint",
@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.12.0",
+    "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
     "next": "^15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
