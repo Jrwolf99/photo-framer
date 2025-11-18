@@ -7,6 +7,7 @@ export default function ImageCard({
   imageHeight,
   backgroundWidth,
   borderRadius,
+  shadow = 2,
   fanRotation = 30,
   fanSpacing = 80,
   fanVerticalHeightDiff = 0.3,
@@ -66,11 +67,12 @@ export default function ImageCard({
         return (
           <div
             key={index}
-            className="overflow-hidden shadow-2xl"
+            className="overflow-hidden"
             style={{
               width: `${imageWidth}px`,
               height: `${imageHeight}px`,
               borderRadius: `${borderRadius}px`,
+              boxShadow: `0 ${shadow * 4}px ${shadow * 6}px -${shadow}px rgba(0, 0, 0, 0.3), 0 ${shadow * 2}px ${shadow * 4}px -${shadow}px rgba(0, 0, 0, 0.2)`,
               ...getFanStyle(index, imageUrls.length),
             }}
           >

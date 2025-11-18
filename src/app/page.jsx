@@ -13,6 +13,7 @@ export default function HomePage() {
   const [imageHeight, setImageHeight] = useState(400);
   const [backgroundWidth, setBackgroundWidth] = useState(800);
   const [borderRadius, setBorderRadius] = useState(16);
+  const [shadow, setShadow] = useState(2);
   const [fanRotation, setFanRotation] = useState(30);
   const [fanSpacing, setFanSpacing] = useState(80);
   const [fanVerticalHeightDiff, setFanVerticalHeightDiff] = useState(0.3);
@@ -49,6 +50,7 @@ export default function HomePage() {
       imageHeight,
       backgroundWidth,
       borderRadius,
+      shadow,
       fanRotation,
       fanSpacing,
       fanVerticalHeightDiff,
@@ -72,6 +74,7 @@ export default function HomePage() {
       imageHeight,
       backgroundWidth,
       borderRadius,
+      shadow,
       fanRotation,
       fanSpacing,
       fanVerticalHeightDiff,
@@ -92,6 +95,7 @@ export default function HomePage() {
     const bgSize = document.backgroundWidth || 800;
     setBackgroundWidth(bgSize);
     setBorderRadius(document.borderRadius || 16);
+    setShadow(document.shadow || 2);
     setFanRotation(document.fanRotation || 30);
     setFanSpacing(document.fanSpacing || 80);
     setFanVerticalHeightDiff(document.fanVerticalHeightDiff || 0.3);
@@ -107,6 +111,7 @@ export default function HomePage() {
     const bgSize = config.backgroundWidth || 800;
     setBackgroundWidth(bgSize);
     setBorderRadius(config.borderRadius || 16);
+    setShadow(config.shadow || 2);
     setFanRotation(config.fanRotation || 30);
     setFanSpacing(config.fanSpacing || 80);
     setFanVerticalHeightDiff(config.fanVerticalHeightDiff || 0.3);
@@ -149,13 +154,18 @@ export default function HomePage() {
   };
 
   const clearAll = () => {
-    if (window.confirm("Are you sure you want to clear all settings? This will not delete your saved documents or configurations. ")) {
+    if (
+      window.confirm(
+        "Are you sure you want to clear all settings? This will not delete your saved documents or configurations. ",
+      )
+    ) {
       setImageUrls([""]);
       setBackgroundColor("#f0f4f8");
       setImageWidth(600);
       setImageHeight(400);
       setBackgroundWidth(800);
       setBorderRadius(16);
+      setShadow(2);
       setFanRotation(30);
       setFanSpacing(80);
       setFanVerticalHeightDiff(0.3);
@@ -581,47 +591,77 @@ export default function HomePage() {
                       className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-blue-600"
                     />
                   </div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Border Radius
-                </h3>
-                <div>
-                  <div className="mb-1 flex items-center justify-between">
-                    <label className="text-xs font-medium text-gray-600">
-                      Radius
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="number"
-                        value={borderRadius}
-                        onChange={(e) => {
-                          const val = Number(e.target.value);
-                          if (!isNaN(val)) {
-                            setBorderRadius(Math.max(0, Math.min(100, val)));
-                          }
-                        }}
-                        className="w-16 rounded border border-gray-300 px-2 py-0.5 text-xs text-gray-700 focus:border-blue-500 focus:outline-none"
-                      />
-                      <span className="text-xs text-gray-500">px</span>
-                      <button
-                        onClick={() => setBorderRadius(16)}
-                        className="rounded bg-gray-300 px-1.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-400"
-                      >
-                        Reset
-                      </button>
+                  <div>
+                    <div className="mb-1 flex items-center justify-between">
+                      <label className="text-xs font-medium text-gray-600">
+                        Border Radius
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          value={borderRadius}
+                          onChange={(e) => {
+                            const val = Number(e.target.value);
+                            if (!isNaN(val)) {
+                              setBorderRadius(Math.max(0, Math.min(100, val)));
+                            }
+                          }}
+                          className="w-16 rounded border border-gray-300 px-2 py-0.5 text-xs text-gray-700 focus:border-blue-500 focus:outline-none"
+                        />
+                        <span className="text-xs text-gray-500">px</span>
+                        <button
+                          onClick={() => setBorderRadius(16)}
+                          className="rounded bg-gray-300 px-1.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-400"
+                        >
+                          Reset
+                        </button>
+                      </div>
                     </div>
+                    <input
+                      type="range"
+                      value={borderRadius}
+                      onChange={(e) => setBorderRadius(Number(e.target.value))}
+                      min="0"
+                      max="100"
+                      step="1"
+                      className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-blue-600"
+                    />
                   </div>
-                  <input
-                    type="range"
-                    value={borderRadius}
-                    onChange={(e) => setBorderRadius(Number(e.target.value))}
-                    min="0"
-                    max="100"
-                    step="1"
-                    className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-blue-600"
-                  />
+                  <div>
+                    <div className="mb-1 flex items-center justify-between">
+                      <label className="text-xs font-medium text-gray-600">
+                        Shadow
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          value={shadow}
+                          onChange={(e) => {
+                            const val = Number(e.target.value);
+                            if (!isNaN(val)) {
+                              setShadow(Math.max(0, Math.min(5, val)));
+                            }
+                          }}
+                          className="w-16 rounded border border-gray-300 px-2 py-0.5 text-xs text-gray-700 focus:border-blue-500 focus:outline-none"
+                        />
+                        <button
+                          onClick={() => setShadow(2)}
+                          className="rounded bg-gray-300 px-1.5 py-0.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-400"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                    <input
+                      type="range"
+                      value={shadow}
+                      onChange={(e) => setShadow(Number(e.target.value))}
+                      min="0"
+                      max="5"
+                      step="0.5"
+                      className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-blue-600"
+                    />
+                  </div>
                 </div>
               </div>
               {hasMultipleImages && (
@@ -802,6 +842,7 @@ export default function HomePage() {
               imageHeight={imageHeight}
               backgroundWidth={backgroundWidth}
               borderRadius={borderRadius}
+              shadow={shadow}
               fanRotation={fanRotation}
               fanSpacing={fanSpacing}
               fanVerticalHeightDiff={fanVerticalHeightDiff}
