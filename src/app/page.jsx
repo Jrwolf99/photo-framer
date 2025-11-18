@@ -144,6 +144,9 @@ export default function HomePage() {
     setImageUrls([...imageUrls, ""]);
   };
 
+  /**
+   * @param {number} index
+   */
   const removeImageInput = (index) => {
     if (imageUrls.length > 1) {
       if (window.confirm("Are you sure you want to remove this image URL?")) {

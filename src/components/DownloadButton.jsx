@@ -12,7 +12,7 @@ export default function DownloadButton({ cardRef, title, backgroundWidth }) {
         backgroundColor: null,
         pixelRatio: 2,
         cacheBust: true,
-        
+
         width: element.scrollWidth || backgroundWidth,
         height: element.scrollHeight,
         style: {
