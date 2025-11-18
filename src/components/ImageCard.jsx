@@ -6,10 +6,10 @@ export default function ImageCard({
   imageWidth,
   imageHeight,
   backgroundWidth,
-  backgroundHeight,
   borderRadius,
   fanRotation = 30,
   fanSpacing = 80,
+  fanVerticalHeightDiff = 0.3,
   translateX = 0,
   translateY = 0,
   imageRotate = 0,
@@ -18,16 +18,15 @@ export default function ImageCard({
   if (imageUrls.length === 0) return null;
 
   const getFanStyle = (index, total) => {
-    const borderWidth = 4;
     const padding = 16;
-    const contentWidth = backgroundWidth - borderWidth * 2 - padding * 2;
-    const contentHeight = backgroundHeight - borderWidth * 2 - padding * 2;
+    const contentWidth = backgroundWidth - padding * 2;
+    const contentHeight = backgroundWidth - padding * 2;
 
     if (total === 1) {
       return {
         position: "absolute",
-        left: `${borderWidth + padding + contentWidth / 2}px`,
-        top: `${borderWidth + padding + contentHeight / 2}px`,
+        left: `${padding + contentWidth / 2}px`,
+        top: `${padding + contentHeight / 2}px`,
         transform: `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) rotate(${imageRotate}deg)`,
         zIndex: 1,
       };
@@ -37,10 +36,12 @@ export default function ImageCard({
     const rotationStep = (maxRotation * 2) / (total - 1);
     const rotation = -maxRotation + rotationStep * index;
 
-    const centerX = borderWidth + padding + contentWidth / 2 + translateX;
-    const centerY = borderWidth + padding + contentHeight / 2 + translateY;
+    const centerX = padding + contentWidth / 2 + translateX;
+    const centerY = padding + contentHeight / 2 + translateY;
     const offsetX = (index - (total - 1) / 2) * fanSpacing;
-    const offsetY = Math.abs(index - (total - 1) / 2) * (fanSpacing * 0.3);
+    const offsetY =
+      Math.abs(index - (total - 1) / 2) *
+      (fanSpacing * fanVerticalHeightDiff * 4);
 
     return {
       position: "absolute",
@@ -55,11 +56,9 @@ export default function ImageCard({
   return (
     <div
       ref={cardRef}
-      className="relative mx-auto border-4 border-black p-4"
+      className="relative mx-auto p-4"
       style={{
-        backgroundColor,
         width: `${backgroundWidth}px`,
-        minHeight: `${backgroundHeight}px`,
       }}
     >
       {imageUrls.map((imageUrl, index) => {

@@ -2,15 +2,22 @@
 
 import { toPng } from "html-to-image";
 
-export default function DownloadButton({ cardRef, title }) {
+export default function DownloadButton({ cardRef, title, backgroundWidth }) {
   const handleDownload = async () => {
     if (!cardRef.current) return;
 
     try {
-      const dataUrl = await toPng(cardRef.current, {
+      const element = cardRef.current;
+      const dataUrl = await toPng(element, {
         backgroundColor: null,
         pixelRatio: 2,
         cacheBust: true,
+        
+        width: element.scrollWidth || backgroundWidth,
+        height: element.scrollHeight,
+        style: {
+          overflow: "visible",
+        },
       });
 
       const link = document.createElement("a");
